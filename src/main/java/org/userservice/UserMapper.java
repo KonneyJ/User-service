@@ -1,7 +1,5 @@
 package org.userservice;
 
-import java.time.LocalDateTime;
-
 public class UserMapper {
     public static UserDto toUserDto(User user) {
         return UserDto.builder()
