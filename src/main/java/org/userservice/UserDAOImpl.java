@@ -1,5 +1,6 @@
 package org.userservice;
 
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -7,6 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
+@Slf4j
 public class UserDAOImpl implements UserDAO {
     private final SessionFactory sessionFactory;
 
@@ -17,6 +19,7 @@ public class UserDAOImpl implements UserDAO {
     // Создание пользователя
     @Override
     public User createUser(User user) {
+        log.info("Получение запроса на создание пользователя в слое DAO {}", user);
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
@@ -35,6 +38,7 @@ public class UserDAOImpl implements UserDAO {
     // Обновление пользователя
     @Override
     public User updateUser(int id, User user) {
+        log.info("Получение запроса на обновление пользователя в слое DAO {}", user);
         if ((user.getId() == 0 || id == 0) && id != user.getId()) {
             throw new IllegalArgumentException("Невозможно обновить пользователя без ID");
         }
@@ -57,6 +61,7 @@ public class UserDAOImpl implements UserDAO {
     // Удлаение пользователя по id
     @Override
     public boolean deleteUser(int id) {
+        log.info("Получение запроса на удаление пользователя в слое DAO с id {}", id);
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
             try {
@@ -79,6 +84,7 @@ public class UserDAOImpl implements UserDAO {
     // Получение пользователя по id
     @Override
     public User getUserById(int id) {
+        log.info("Получение запроса на получение пользователя в слое DAO с id {}", id);
         try (Session session = sessionFactory.openSession()) {
             User user = session.get(User.class, id);
             return user;
@@ -90,6 +96,7 @@ public class UserDAOImpl implements UserDAO {
     // Получение списка всех пользователей
     @Override
     public List<User> getAllUsers() {
+        log.info("Получение запроса на получение списка всех пользователей в слое DAO");
         try (Session session = sessionFactory.openSession()) {
             Query<User> query = session.createQuery("FROM User", User.class);
             return query.list();
