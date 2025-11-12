@@ -1,7 +1,11 @@
-package org.userservice;
+package org.userservice.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.userservice.dao.UserDAO;
+import org.userservice.dto.UserDto;
+import org.userservice.mapper.UserMapper;
+import org.userservice.model.UserEntity;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -44,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<UserDto> getAllUsers() {
         log.info("Получение запроса на получение списка всех пользователей в слое сервис");
-        Collection<User> users = userDAO.getAllUsers();
+        Collection<UserEntity> users = userDAO.getAllUsers();
         return users.stream()
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());

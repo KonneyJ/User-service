@@ -1,5 +1,4 @@
-package org.userservice;
-
+package org.userservice.util;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;

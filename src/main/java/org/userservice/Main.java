@@ -1,6 +1,13 @@
 package org.userservice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.userservice.dao.UserDAO;
+import org.userservice.dao.UserDAOImpl;
+import org.userservice.dto.UserDto;
+import org.userservice.mapper.UserMapper;
+import org.userservice.service.UserService;
+import org.userservice.service.UserServiceImpl;
+import org.userservice.util.HibernateUtil;
 
 @Slf4j
 public class Main {
