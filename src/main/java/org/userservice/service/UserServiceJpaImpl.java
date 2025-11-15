@@ -8,6 +8,7 @@ import org.userservice.exception.UserNotFoundException;
 import org.userservice.mapper.UserMapper;
 import org.userservice.model.UserEntity;
 import org.userservice.repository.UserRepository;
+import org.userservice.service.kafka.UserServicePublish;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
