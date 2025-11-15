@@ -1,6 +1,8 @@
 package org.userservice;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.userservice.dao.UserDAO;
 import org.userservice.dao.UserDAOImpl;
 import org.userservice.dto.UserDto;
@@ -10,8 +12,11 @@ import org.userservice.service.UserServiceImpl;
 import org.userservice.util.HibernateUtil;
 
 @Slf4j
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
+        SpringApplication.run(Main.class, args);
+
         log.info("Успешный запуск приложения");
         UserDAO userDAO = new UserDAOImpl(HibernateUtil.getSessionFactory());
         UserMapper mapper = new UserMapper();
