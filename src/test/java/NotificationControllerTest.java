@@ -9,7 +9,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.web.servlet.MockMvc;
 import org.userservice.controller.UserController;
-import org.userservice.service.kafka.EmailService;
+import org.userservice.service.kafka.EmailServiceImlp;
 
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = UserController.class)
-@Import(EmailService.class)
+@Import(EmailServiceImlp.class)
 public class NotificationControllerTest {
     @Autowired
     private MockMvc mockMvc;

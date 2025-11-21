@@ -27,6 +27,7 @@ public class UserServiceJpaImpl implements UserService {
         log.info("Получение запроса на создание пользователя в слое сервис {}", user);
         UserDto userDto = userMapper.toUserDto(userRepository.save(userMapper.toUser(user)));
         userServicePublish.publishUserCreated(user.getEmail());
+
         return userDto;
     }
 
@@ -37,6 +38,7 @@ public class UserServiceJpaImpl implements UserService {
         UserEntity user = userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("Пользователь с id = " + id + " не найден"));
         userDto.setId(user.getId());
+
         return userMapper.toUserDto(userRepository.save(userMapper.toUser(userDto)));
     }
 
@@ -48,6 +50,7 @@ public class UserServiceJpaImpl implements UserService {
                 () -> new UserNotFoundException("Пользователь с id = " + id + " не найден"));
         userRepository.deleteById(id);
         userServicePublish.publishUserDeleted(user.getEmail());
+
         return true;
     }
 
@@ -55,6 +58,7 @@ public class UserServiceJpaImpl implements UserService {
     @Override
     public UserDto getUserById(int id) {
         log.info("Получение запроса на получение пользователя в слое сервис с id {}", id);
+
         return userMapper.toUserDto(userRepository.findById(id).orElseThrow(
                 () -> new UserNotFoundException("Пользователь с id = " + id + " не найден")));
     }
@@ -64,6 +68,7 @@ public class UserServiceJpaImpl implements UserService {
     public Collection<UserDto> getAllUsers() {
         log.info("Получение запроса на получение списка всех пользователей в слое сервис");
         Collection<UserEntity> users = userRepository.findAll();
+
         return users.stream()
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());

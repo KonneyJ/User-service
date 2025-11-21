@@ -1,14 +1,14 @@
 package org.userservice.service.kafka;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 import org.userservice.model.UserEvent;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceListen {
-    @Autowired
-    private EmailService emailService;
+    private final EmailServiceImlp emailService;
 
     @KafkaListener(topics = "user.events", groupId = "notification-group")
     public void handleUserEvent(UserEvent event) {

@@ -20,6 +20,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto createUser(UserDto user) {
         log.info("Получение запроса на создание пользователя в слое сервис {}", user);
+
         return mapper.toUserDto(userDAO.createUser(mapper.toUser(user)));
     }
 
@@ -27,6 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(int id, UserDto user) {
         log.info("Получение запроса на обновление пользователя в слое сервис {}", user);
+
         return mapper.toUserDto(userDAO.updateUser(id, mapper.toUser(user)));
     }
 
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean deleteUser(int id) {
         log.info("Получение запроса на удаление пользователя в слое сервис с id {}", id);
+
         return userDAO.deleteUser(id);
     }
 
@@ -41,6 +44,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUserById(int id) {
         log.info("Получение запроса на получение пользователя в слое сервис с id {}", id);
+
         return mapper.toUserDto(userDAO.getUserById(id));
     }
 
@@ -49,6 +53,7 @@ public class UserServiceImpl implements UserService {
     public Collection<UserDto> getAllUsers() {
         log.info("Получение запроса на получение списка всех пользователей в слое сервис");
         Collection<UserEntity> users = userDAO.getAllUsers();
+
         return users.stream()
                 .map(UserMapper::toUserDto)
                 .collect(Collectors.toList());

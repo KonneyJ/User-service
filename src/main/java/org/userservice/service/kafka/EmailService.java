@@ -1,28 +1,16 @@
 package org.userservice.service.kafka;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Service;
+/**
+ * Сервис для отправки email‑уведомлений о ключевых событиях жизненного цикла пользовательского аккаунта.
+ */
+public interface EmailService {
+    /**
+     * Отправляет email‑уведомление о создании пользовательского аккаунта.
+     */
+    void sendCreatedEmail(String to);
 
-@Service
-public class EmailService {
-    @Autowired
-    private JavaMailSender mailSender;
-
-    public void sendCreatedEmail(String to) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Ваш аккаунт создан");
-        message.setText("Здравствуйте! Ваш аккаунт на сайте был успешно создан.");
-        mailSender.send(message);
-    }
-
-    public void sendDeletedEmail(String to) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(to);
-        message.setSubject("Аккаунт удалён");
-        message.setText("Здравствуйте! Ваш аккаунт был удалён.");
-        mailSender.send(message);
-    }
+    /**
+     * Отправляет email‑уведомление об удалении пользовательского аккаунта.
+     */
+    void sendDeletedEmail(String to);
 }
